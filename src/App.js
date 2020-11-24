@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import logo from './ui/assets/img/logo-fte.png';
 import './App.css';
+import ColorPick from './components/ColorPick/index.jsx';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="logo-wrapper">
+          <img src={logo} alt="logo" />
+        </div>
+        <h2>FLAT EARTH ESPORTS</h2>
+        <h1>AVATAR GENERATOR</h1>
       </header>
+      <main>
+        <ColorPick />
+      </main>
     </div>
   );
 }
