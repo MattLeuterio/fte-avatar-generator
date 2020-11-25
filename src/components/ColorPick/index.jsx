@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import reactCSS from "reactcss";
 import { ChromePicker } from "react-color";
-import {
-  exportComponentAsJPEG,
-  exportComponentAsPNG,
-} from "react-component-export-image";
+import { exportComponentAsJPEG } from "react-component-export-image";
 
 import {
   ColorPickWrapper,
@@ -95,8 +92,8 @@ const ColorPick = () => {
         background: `rgba(${colors2.r}, ${colors2.g}, ${colors2.b}, ${colors2.a})`,
       },
       imageBackground: {
-        width: "300px",
-        height: "300px",
+        width: "500px",
+        height: "500px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

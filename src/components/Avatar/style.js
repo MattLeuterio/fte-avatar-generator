@@ -15,15 +15,15 @@ export const ImageWrapper = styled.div`
   `;
 
   export const LogoWrapper = styled.div`
-    width: 250px;
+    width: 450px;
     position: absolute;
     top: 50px;
   `;
 
   export const TextWrapper = styled.div`
     position: absolute;
-    top: 45px;
-    max-width: 300px;
+    top: 55px;
+    max-width: 500px;
     overflow: hidden;
   `;
 
