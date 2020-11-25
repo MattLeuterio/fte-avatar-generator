@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import reactCSS from "reactcss";
 import { ChromePicker } from "react-color";
 import {
+  exportComponentAsJPEG,
+  exportComponentAsPNG,
+} from "react-component-export-image";
+
+import {
   ColorPickWrapper,
-  PickersWrapper,
-  ImageWrapper,
+  SettingsWrapper,
   Swatch,
   Popover,
   Cover,
   SwatchWrapper,
+  InputContainer,
+  ButtonsContainer,
 } from "./style";
+import iconInput from "../../ui/assets/img/icon-input.svg";
+import download from "../../ui/assets/img/icon-download.svg";
+import Avatar from "../Avatar";
 
 const defaultColor = {
   color: {
@@ -26,21 +35,27 @@ const defaultColor = {
   },
 };
 
+const defaultName = "Your Name";
+
 const ColorPick = () => {
   const [displayColor, setDisplayColor] = useState(false);
   const [displayColor2, setDisplayColor2] = useState(false);
   const [colors, setColors] = useState(defaultColor.color);
   const [colors2, setColors2] = useState(defaultColor.color2);
+  const [name, setName] = useState(defaultName);
+
+  const componentRef = useRef();
 
   useEffect(() => {}, []);
 
-  const handleClick = () => {
-    setDisplayColor2(false);
-    setDisplayColor(!displayColor);
-  };
-  const handleClick2 = () => {
-    setDisplayColor(false);
-    setDisplayColor2(!displayColor2);
+  const handleClick = (type) => {
+    if (type === "first") {
+      setDisplayColor2(false);
+      setDisplayColor(!displayColor);
+    } else {
+      setDisplayColor(false);
+      setDisplayColor2(!displayColor2);
+    }
   };
 
   const handleClose = () => {
@@ -55,6 +70,15 @@ const ColorPick = () => {
     setColors2(color.rgb);
   };
 
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+    if (e.target.value === "") setName(defaultName);
+  };
+
+  const handleDownload = () => {
+    window.scrollTo(0, 0);
+    exportComponentAsJPEG(componentRef, { fileName: `${name}.FTE.jpeg` });
+  };
   const styles = reactCSS({
     default: {
       color: {
@@ -73,9 +97,12 @@ const ColorPick = () => {
       imageBackground: {
         width: "300px",
         height: "300px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         background: `linear-gradient(
           144deg, 
-          rgba(${colors.r}, ${colors.g}, ${colors.b}, ${colors.a}) 20%, 
+          rgba(${colors.r}, ${colors.g}, ${colors.b}, ${colors.a}) 10%, 
           rgba(${colors2.r}, ${colors2.g}, ${colors2.b}, ${colors2.a}) 80%
         )`,
       },
@@ -84,16 +111,18 @@ const ColorPick = () => {
 
   return (
     <ColorPickWrapper>
-      <ImageWrapper>
-        <div style={styles.imageBackground}></div>
-      </ImageWrapper>
-      <PickersWrapper>
+      <Avatar
+        ref={componentRef}
+        name={name.toUpperCase()}
+        style={styles.imageBackground}
+      />
+      <SettingsWrapper>
         <h3>Pick Colors</h3>
         <SwatchWrapper>
-          <Swatch onClick={handleClick}>
+          <Swatch onClick={() => handleClick("first")}>
             <div style={styles.color} />
           </Swatch>
-          <Swatch onClick={handleClick2}>
+          <Swatch onClick={() => handleClick("second")}>
             <div style={styles.color2} />
           </Swatch>
         </SwatchWrapper>
@@ -109,7 +138,22 @@ const ColorPick = () => {
             <ChromePicker color={colors2} onChange={handleChange2} />
           </Popover>
         )}
-      </PickersWrapper>
+        <InputContainer>
+          <img src={iconInput} className="icon" alt="icon input" />
+          <input
+            type="text"
+            className="input"
+            placeholder="Your name"
+            onChange={(e) => handleChangeName(e)}
+            maxLength="15"
+          />
+        </InputContainer>
+        <ButtonsContainer>
+          <button onClick={() => handleDownload()}>
+            <img src={download} alt="icon download" /> JPEG
+          </button>
+        </ButtonsContainer>
+      </SettingsWrapper>
     </ColorPickWrapper>
   );
 };
