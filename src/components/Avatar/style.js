@@ -38,8 +38,12 @@ export const ImageWrapper = styled.div`
   `;
 
   export const NamePlayer = styled.div`
-    font-size: 20px;
+    font-size: 30px;
     font-family: "Montserrat", sans-serif;
     font-weight: 900;
     color: white;
+    
+    @media (max-width: 500px) {
+      font-size: 20px;
+    }
   `;
