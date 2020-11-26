@@ -74,7 +74,7 @@ const ColorPick = () => {
 
   const handleDownload = () => {
     window.scrollTo(0, 0);
-    exportComponentAsJPEG(componentRef, { fileName: `${name}.FTE.jpeg` });
+    exportComponentAsJPEG(componentRef, { fileName: `${name}.FTE.jpg` });
   };
   const styles = reactCSS({
     default: {
@@ -92,8 +92,8 @@ const ColorPick = () => {
         background: `rgba(${colors2.r}, ${colors2.g}, ${colors2.b}, ${colors2.a})`,
       },
       imageBackground: {
-        width: "500px",
-        height: "500px",
+        width: window.innerWidth < 500 ? "300px" : "500px",
+        height: window.innerWidth < 500 ? "300px" : "500px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -147,7 +147,7 @@ const ColorPick = () => {
         </InputContainer>
         <ButtonsContainer>
           <button onClick={() => handleDownload()}>
-            <img src={download} alt="icon download" /> JPEG
+            <img src={download} alt="icon download" /> JPG
           </button>
         </ButtonsContainer>
       </SettingsWrapper>

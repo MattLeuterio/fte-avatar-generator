@@ -18,6 +18,11 @@ export const ImageWrapper = styled.div`
     width: 450px;
     position: absolute;
     top: 50px;
+
+    @media (max-width: 500px) {
+      width: 270px;
+      top: 40px;
+    }
   `;
 
   export const TextWrapper = styled.div`
@@ -25,10 +30,15 @@ export const ImageWrapper = styled.div`
     top: 55px;
     max-width: 500px;
     overflow: hidden;
+
+    @media (max-width: 500px) {
+      max-width: 270px;
+      top: 35px;
+    }
   `;
 
   export const NamePlayer = styled.div`
-    font-size: 30px;
+    font-size: 20px;
     font-family: "Montserrat", sans-serif;
     font-weight: 900;
     color: white;

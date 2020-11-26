@@ -27,7 +27,7 @@ export const SettingsWrapper = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 20px;
 
 
   @media (max-width: 500px) {
